@@ -14,7 +14,7 @@ func NewGetAllAction() *GetAllAction {
 	return &GetAllAction{}
 }
 
-func (a *GetAllAction) Do(ctx context.Context, latitude, longitude float64, query string) ([]meme.Meme, error) {
+func (a *GetAllAction) Do(ctx context.Context, latitude, longitude float64, query string) []meme.Meme {
 	g := lorem.NewGenerator()
 	g.WordsPerSentence = 10
 	g.SentencesPerParagraph = 5
@@ -32,5 +32,5 @@ func (a *GetAllAction) Do(ctx context.Context, latitude, longitude float64, quer
 		})
 	}
 
-	return memes, nil
+	return memes
 }

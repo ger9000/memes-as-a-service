@@ -36,15 +36,11 @@ func (c *controller) Invoke(w http.ResponseWriter, r *http.Request) {
 		longitude = longitudeParsed
 	}
 
-	memes, err := c.action.Do(r.Context(), latitude, longitude, query)
-	if err != nil {
-		router.InternalServerError(w, r, nil)
-		return
-	}
+	memes := c.action.Do(r.Context(), latitude, longitude, query)
 
-	router.Success(w, r, map[string]interface{}{
-		"count": len(memes),
-		"data":  memes,
+	router.Success(w, r, Response{
+		Count: len(memes),
+		Data:  memes,
 	})
 }
 
